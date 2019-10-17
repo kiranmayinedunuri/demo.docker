@@ -15,10 +15,6 @@
 	<description>Demo project for Spring Boot</description>
 	<packaging>rpm</packaging>
 
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -52,13 +48,59 @@
 					</execution>
 				</executions>
 				<configuration>
-                     <copyright>2010, NoBody</copyright>
+				     <name>demo-docker</name>
                      <group>Development</group>
                      <description>Maven Recipe: RPM Package.</description>
+				   	<mappings>
+						<mapping>
+							<directory> ${rpmInstallDir}</directory>
+							<groupname>${rpmGroupname}</groupname>
+							<filemode>${rpmDirectoryMode}</filemode>
+						</mapping>
+						<mapping>
+							<directory>${rpmInstallDir}/lib</directory>
+							<username>${rpmUsername}</username>
+							<groupname>${rpmGroupname}</groupname>
+							<filemode>${rpmDirectoryMode}</filemode>
+						</mapping>
+						<mapping>
+							<directory>${rpmInstallDir}/bin</directory>
+							<username>${rpmUsername}</username>
+							<groupname>${rpmGroupname}</groupname>
+							<filemode>${rpmDirectoryMode}</filemode>
+						</mapping>
+						<mapping>
+							<directory>${rpmInstallDir}/docs</directory>
+							<username>${rpmUsername}</username>
+							<groupname>${rpmGroupname}</groupname>
+							<filemode>${rpmDirectoryMode}</filemode>
+						</mapping>
+						<mapping>
+							<directory>${rpmInstallDir}/docs/sample</directory>
+							<username>${rpmUsername}</username>
+							<groupname>${rpmGroupname}</groupname>
+							<filemode>${rpmDirectoryMode}</filemode>
+						</mapping>
+						<mapping>
+							<directory>${rpmInstallDir}/etc</directory>
+							<username>${rpmUsername}</username>
+							<groupname>${rpmGroupname}</groupname>
+							<filemode>${rpmDirectoryMode}</filemode>
+						</mapping>
+					</mappings>
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>docker-spring-boot</finalName>
 	</build>
-
+	<properties>
+	    <java.version>1.8</java.version>
+		<rpmDirectoryMode>0755</rpmDirectoryMode>
+		<rpmGroupname>web</rpmGroupname>
+		<rpmUsername>webuser</rpmUsername>
+		<rpmArchitecture>x86_64</rpmArchitecture>
+		<rpmSoftwareName>demo-docker</rpmSoftwareName>
+		<baseInstallDir>/opt/demo/installed</baseInstallDir>
+		<rpmSpftware>${rpmSoftwareName}-${project.version}</rpmSpftware>
+		<rpmInstallDir>${baseInstallDir}/${rpmSpftware}</rpmInstallDir>
+	</properties>
 </project>
